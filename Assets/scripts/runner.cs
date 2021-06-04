@@ -7,6 +7,8 @@ public class runner : MonoBehaviour
     public static List<runner> runs;
 
     Rigidbody2D _rgb;
+
+    Animator _anim;
     
     // Start is called before the first frame update
     void Start()
@@ -15,6 +17,10 @@ public class runner : MonoBehaviour
         runs.Add(this);
 
         _rgb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+
+        _anim.speed = CONSTANT.speed;
+
     }
 
     // Update is called once per frame
@@ -34,6 +40,9 @@ public class runner : MonoBehaviour
     }
 
     public void Move(Vector2 vecM) {
+
+        if(vecM == new Vector2 (0, -1))
+            _anim.SetBool("roll", true);
 
         _rgb.AddForce(vecM * 300);
     }
